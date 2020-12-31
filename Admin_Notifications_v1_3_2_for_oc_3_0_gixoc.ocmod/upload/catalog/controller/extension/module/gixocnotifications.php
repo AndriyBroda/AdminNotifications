@@ -11,8 +11,11 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 	}
 
 	public function new_order(&$route, &$data) {
-		if (isset($this->session->data['order_id']) && !empty($this->session->data['order_id']) ) {
-			$order_id = array($this->session->data['order_id']);
+		$order_id = $output;
+    
+		if (isset($order_id) && !empty($order_id) ) {
+      			$order_id = array($order_id);
+      
 			if ($this->config->get('module_gixocnotifications_status')) {
 				$this->options('new_order_', $order_id);
 			}

@@ -596,7 +596,7 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 	public function install() {
 		$this->load->model('setting/event');
 
-		$this->model_setting_event->addEvent('GixOCNotificationsNewOrder', 'catalog/controller/checkout/success/before', 'extension/module/gixocnotifications/new_order');
+		$this->model_setting_event->addEvent('GixOCNotificationsNewOrder', 'catalog/model/checkout/order/addOrder/after', 'extension/module/gixocnotifications/new_order');
 		$this->model_setting_event->addEvent('GixOCNotificationsNewCustomer', 'catalog/model/account/customer/addCustomer/after', 'extension/module/gixocnotifications/new_customer');
 		$this->model_setting_event->addEvent('GixOCNotificationsNewReview', 'catalog/model/catalog/review/addReview/before', 'extension/module/gixocnotifications/new_review');
 		$this->model_setting_event->addEvent('GixOCNotificationsOrders', 'catalog/model/checkout/order/addOrderHistory/after', 'extension/module/gixocnotifications/orders');

@@ -224,13 +224,14 @@
                       <tr>
                         <td rowspan="2" class="text-right">{{ column_user }}</td>
                         <td rowspan="2" class="text-right control-label">{{ messenger }}{{ column_id }} <a onclick="help_id('{{ messenger }}');" style="font-size:15px;cursor: pointer;"><i class="fa fa-life-ring"></i></a></td>
-                        <td colspan="4" class="text-center">{{ column_new }}</td>
+                        <td colspan="5" class="text-center">{{ column_new }}</td>
                         <td rowspan="2" class="text-right">{{ tab_action }}</td>
                       </tr>
                       <tr>
                         <td class="text-center">{{ column_new_order }}</td>
                         <td class="text-center">{{ column_new_customer }}</td>
                         <td class="text-center">{{ column_new_review }}</td>
+                        <td class="text-center">{{ column_new_callback }}</td>
                         <td class="text-center">{{ column_new_return }}</td>
                       </tr>
                     </thead>
@@ -254,6 +255,11 @@
                         <td class="text-center"><input name="module_gixocnotifications_userdata[{{ messenger }}][{{ user.user_id }}][new_review_{{ messenger }}]" type="checkbox" checked></td>
                         {% else %}
                         <td class="text-center"><input name="module_gixocnotifications_userdata[{{ messenger }}][{{ user.user_id }}][new_review_{{ messenger }}]" type="checkbox"></td>
+                        {% endif %}
+                        {% if (attribute(attribute(attribute(module_gixocnotifications_userdata, messenger), user.user_id), 'new_callback_' ~ messenger)) %}
+                        <td class="text-center"><input name="module_gixocnotifications_userdata[{{ messenger }}][{{ user.user_id }}][new_callback_{{ messenger }}]" type="checkbox" checked></td>
+                        {% else %}
+                        <td class="text-center"><input name="module_gixocnotifications_userdata[{{ messenger }}][{{ user.user_id }}][new_callback_{{ messenger }}]" type="checkbox"></td>
                         {% endif %}
                         {% if (attribute(attribute(attribute(module_gixocnotifications_userdata, messenger), user.user_id), 'new_return_' ~ messenger)) %}
                         <td class="text-center"><input name="module_gixocnotifications_userdata[{{ messenger }}][{{ user.user_id }}][new_return_{{ messenger }}]" type="checkbox" checked></td>
@@ -284,6 +290,11 @@
                         <td class="text-center"><input name="module_gixocnotifications_groupdata[{{ messenger }}][{{ id_group }}][new_review]" type="checkbox" checked></td>
                         {% else %}
                         <td class="text-center"><input name="module_gixocnotifications_groupdata[{{ messenger }}][{{ id_group }}][new_review]" type="checkbox"></td>
+                        {% endif %}
+                        {% if group.new_callback %}
+                        <td class="text-center"><input name="module_gixocnotifications_groupdata[{{ messenger }}][{{ id_group }}][new_callback]" type="checkbox" checked></td>
+                        {% else %}
+                        <td class="text-center"><input name="module_gixocnotifications_groupdata[{{ messenger }}][{{ id_group }}][new_callback]" type="checkbox"></td>
                         {% endif %}
                         {% if group.new_return %}
                         <td class="text-center"><input name="module_gixocnotifications_groupdata[{{ messenger }}][{{ id_group }}][new_return]" type="checkbox" checked></td>
@@ -445,6 +456,35 @@
                           <table class="table table-bordered table-hover">
                             <tbody>
                             {% for key, list in reviewvar %}
+                            <tr>
+                              <td class="text-left">{{ key }}</td>
+                              <td class="text-left">{{ list }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend>{{ legend_new_callback }} ({{ attribute(messengers_text, keys) }})</legend>
+                    <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ help_new_callback }}</div>
+                    <div class="form-group required">
+                      <div class="col-sm-8">
+                        {% for language in languages %}
+                        <div class="input-group">
+                          <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                          <textarea name="module_gixocnotifications_langdata[{{ language.language_id }}][new_callback_{{ messenger }}]" rows="7" placeholder="{{ help_new_callback_ex }}" class="form-control">{{ attribute(attribute(module_gixocnotifications_langdata, language.language_id), 'new_callback_' ~ messenger) ? attribute(attribute(module_gixocnotifications_langdata, language.language_id), 'new_callback_' ~ messenger) : help_new_callback_ex }}</textarea>
+                        </div>
+                        {% endfor %}
+                      </div>
+                      <div class="col-sm-4">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTable4{{ messenger }}" class="btn btn-primary collapsed">{{ text_variables }}</a>
+                        <div id="collapseTable4{{ messenger }}" class="panel-collapse collapse">
+                          <table class="table table-bordered table-hover">
+                            <tbody>
+                            {% for key, list in callbackvar %}
                             <tr>
                               <td class="text-left">{{ key }}</td>
                               <td class="text-left">{{ list }}</td>
@@ -677,6 +717,7 @@ function addGroup{{ messenger }}() {
 	html += '                        <td class="text-center"><input type="checkbox" name="module_gixocnotifications_groupdata[{{ messenger }}][' + group_row_{{ messenger }} + '][new_order]"></td>';
 	html += '                        <td class="text-center"><input type="checkbox" name="module_gixocnotifications_groupdata[{{ messenger }}][' + group_row_{{ messenger }} + '][new_customer]"></td>';
 	html += '                        <td class="text-center"><input type="checkbox" name="module_gixocnotifications_groupdata[{{ messenger }}][' + group_row_{{ messenger }} + '][new_review]"></td>';
+	html += '                        <td class="text-center"><input type="checkbox" name="module_gixocnotifications_groupdata[{{ messenger }}][' + group_row_{{ messenger }} + '][new_callback]"></td>';
 	html += '                        <td class="text-center"><input type="checkbox" name="module_gixocnotifications_groupdata[{{ messenger }}][' + group_row_{{ messenger }} + '][new_return]"></td>';
 	html += '                        <td><button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger pull-right" onclick="confirm(\'{{ text_confirm }}\') ? delGroup(\'{{ messenger }}\', ' + group_row_{{ messenger }} + ') : false;"><i class="fa fa-trash-o"></i></button></td>';
 	html += '                      </tr>';

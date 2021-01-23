@@ -14,7 +14,7 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 		$order_id = $output;
     
 		if (isset($order_id) && !empty($order_id) ) {
-      			$order_id = array($order_id);
+      $order_id = array($order_id);
       
 			if ($this->config->get('module_gixocnotifications_status')) {
 				$this->options('new_order_', $order_id);
@@ -37,6 +37,12 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 	public function new_review(&$route, &$data) {
 		if (isset($data) && !empty($data) && ($this->config->get('module_gixocnotifications_status'))) {
 			$this->options('new_review_', $data);
+		}
+	}
+  
+  public function new_callback(&$route, &$data) {
+		if (isset($data) && !empty($data) && ($this->config->get('module_gixocnotifications_status'))) {
+			$this->options('new_callback_', $data);
 		}
 	}
 
@@ -417,6 +423,26 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 			'{product_model}' => isset($product_info['model']) ? $product_info['model'] : '',
 			'{product_sku}'   => isset($product_info['sku']) ? $product_info['sku'] : '',
 			'{date_added}'    => date("Y-m-d H:i:s")
+		);
+
+		return str_replace(array("\r\n", "\r", "\n"), chr(10), preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), chr(10), trim(str_replace($find, $replace, $message))));
+  }
+  
+	private function new_callback_template($data, $messenger) {
+		$message = $this->langdata[$this->language_id]['new_callback_' . $messenger];
+
+		$find = array(
+			'{store_name}',
+      '{name}',
+      '{email}',
+      '{enquiry}',
+		);
+  
+		$replace = array(
+			'{store_name}'    => $this->config->get('config_name'),
+			'{name}'          => isset($data['user_name'])  ? $data['user_name'] : '',
+			'{email}'         => isset($data['user_email']) ? $data['user_email'] : '',
+			'{enquiry}'       => isset($data['user_enquiry']) ? $data['user_enquiry'] : '',
 		);
 
 		return str_replace(array("\r\n", "\r", "\n"), chr(10), preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), chr(10), trim(str_replace($find, $replace, $message))));

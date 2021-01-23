@@ -181,6 +181,7 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 		$data['ordervar'] = $this->ordervar();
 		$data['customervar'] = $this->customervar();
 		$data['reviewvar'] = $this->reviewvar();
+		$data['callbackvar'] = $this->callbackvar();
 		$data['returnvar'] = $this->returnvar();
 		//Simple
 		$data['simplevar'] = $this->simplevar();
@@ -353,6 +354,15 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 		$temp['{product_model}'] = $this->language->get('text_product_model');
 		$temp['{product_sku}'] = $this->language->get('text_product_sku');
 		$temp['{date_added}'] = $this->language->get('text_date_added');
+
+		return $temp;
+	}
+	private function callbackvar() {
+		$temp = array();
+		$temp['{store_name}'] = $this->language->get('text_store_name');
+		$temp['{name}']       = $this->language->get('text_firstname');
+		$temp['{email}']     = $this->language->get('text_email');
+		$temp['{enquiry}']     = $this->language->get('text_enquiry');
 
 		return $temp;
 	}
@@ -596,9 +606,10 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 	public function install() {
 		$this->load->model('setting/event');
 
-		$this->model_setting_event->addEvent('GixOCNotificationsNewOrder', 'catalog/model/checkout/order/addOrder/after', 'extension/module/gixocnotifications/new_order');
+		$this->model_setting_event->addEvent('GixOCNotificationsNewOrder', 'catalog/model/checkout/order/addOrder/before', 'extension/module/gixocnotifications/new_order');
 		$this->model_setting_event->addEvent('GixOCNotificationsNewCustomer', 'catalog/model/account/customer/addCustomer/after', 'extension/module/gixocnotifications/new_customer');
 		$this->model_setting_event->addEvent('GixOCNotificationsNewReview', 'catalog/model/catalog/review/addReview/before', 'extension/module/gixocnotifications/new_review');
+		$this->model_setting_event->addEvent('GixOCNotificationsNewCallback', 'catalog/model/information/contact/before', 'extension/module/gixocnotifications/new_callback');
 		$this->model_setting_event->addEvent('GixOCNotificationsOrders', 'catalog/model/checkout/order/addOrderHistory/after', 'extension/module/gixocnotifications/orders');
 		$this->model_setting_event->addEvent('GixOCNotificationsNewReturn ', 'catalog/model/account/return/addReturn/after', 'extension/module/gixocnotifications/new_return');
 
@@ -624,6 +635,7 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 		$this->model_setting_event->deleteEventByCode('GixOCNotificationsNewOrder');
 		$this->model_setting_event->deleteEventByCode('GixOCNotificationsNewCustomer');
 		$this->model_setting_event->deleteEventByCode('GixOCNotificationsNewReview');
+		$this->model_setting_event->deleteEventByCode('GixOCNotificationsNewCallback');
 		$this->model_setting_event->deleteEventByCode('GixOCNotificationsOrders');
 		$this->model_setting_event->deleteEventByCode('GixOCNotificationsNewReturn');
 

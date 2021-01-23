@@ -16,6 +16,7 @@ $_['text_store_name']               = 'Название магазина';
 $_['text_firstname']                = 'Имя';
 $_['text_lastname']                 = 'Фамилия';
 $_['text_email']                    = 'E-mail';
+$_['text_enquiry']                  = 'Запрос (текст, вопрос)';
 $_['text_telephone']                = 'Телефон';
 $_['text_customer_groups']          = 'Группа покупателя';
 $_['text_payment_address']          = 'Адрес оплаты';
@@ -71,6 +72,7 @@ $_['legend_new_order']              = 'Шаблон уведомления о н
 $_['legend_new_customer']           = 'Шаблон уведомления о новом покупателе';
 $_['legend_new_affiliate']          = 'Шаблон уведомления о новом партнере';
 $_['legend_new_review']             = 'Шаблон уведомления о новом отзыве';
+$_['legend_new_callback']           = 'Шаблон уведомления о новой заявке';
 $_['legend_new_return']             = 'Шаблон уведомления о новом возврате';
 $_['legend_orders']                 = 'Шаблоны уведомлений о статусах заказа';
 
@@ -88,6 +90,7 @@ $_['column_new_order']              = 'заказе';
 $_['column_new_customer']           = 'покупателе';
 $_['column_new_affiliate']          = 'партнере';
 $_['column_new_review']             = 'отзыве';
+$_['column_new_callback']           = 'заявке';
 $_['column_new_return']             = 'возврате';
 
 // Entry
@@ -113,6 +116,8 @@ $_['help_new_affiliate']            = 'Здесь можно настроить 
 $_['help_new_affiliate_ex']         = 'Зарегистрировался новый партнер: магазин {store_name}, {affiliate_firstname}, номер телефона: {affiliate_telephone}, e-mail покупателя: {affiliate_email}';
 $_['help_new_review']               = 'Здесь можно настроить шаблон уведомления о новом отзыве к товару';
 $_['help_new_review_ex']            = 'Вы получили новый отзыв к товару {product_name} (артикул {product_sku}) от покупателя {name}, магазин {store_name}. Текст отзыва: {review}';
+$_['help_new_callback']               = 'Здесь можно настроить шаблон уведомления о новой заявке';
+$_['help_new_callback_ex']            = 'Вы получили новую заявку!';
 $_['help_new_return']               = 'Здесь можно настроить шаблон уведомления о новом возврате';
 $_['help_new_return_ex']            = 'Покупатель {customer_firstname} запросил возврат товара {product_name} (модель {product_model}), заказ № {order_id}, магазин {store_name}. Комментарий от покупателя: "{comment}"';
 $_['help_module']                   = 'Инструкция по настройке модуля';

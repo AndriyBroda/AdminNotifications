@@ -16,6 +16,7 @@ $_['text_store_name']               = 'Store Name';
 $_['text_firstname']                = 'Firstname';
 $_['text_lastname']                 = 'Lastname';
 $_['text_email']                    = 'E-mail';
+$_['text_enquiry']                  = 'Enquiry (question etc)';
 $_['text_telephone']                = 'Telephone';
 $_['text_customer_groups']          = 'Customer groups';
 $_['text_payment_address']          = 'Payment address';
@@ -71,6 +72,7 @@ $_['legend_new_order']              = 'Notification of new order';
 $_['legend_new_customer']           = 'Notification of new customer';
 $_['legend_new_affiliate']          = 'Notification of new affiliate';
 $_['legend_new_review']             = 'Notification of new review';
+$_['legend_new_callback']             = 'Notification of new callback';
 $_['legend_new_return']             = 'Notification of new return';
 $_['legend_orders']                 = 'Notification of status orders';
 
@@ -88,6 +90,7 @@ $_['column_new_order']              = 'order';
 $_['column_new_customer']           = 'customer';
 $_['column_new_affiliate']          = 'affiliate';
 $_['column_new_review']             = 'review';
+$_['column_new_callback']           = 'callback';
 $_['column_new_return']             = 'return';
 
 // Entry
@@ -113,6 +116,8 @@ $_['help_new_affiliate']            = 'Settings a notification template for affi
 $_['help_new_affiliate_ex']         = 'Created new affiliate: {affiliate_firstname}, phone: {affiliate_telephone}, email: {affiliate_email}, store {store_name}';
 $_['help_new_review']               = 'Settings a notification template for new review';
 $_['help_new_review_ex']            = 'You have received a new review to the product {product_name} (SKU {product_sku}) from the customer {name}, store {store_name}. Review text: "{review}"';
+$_['help_new_callback']               = 'Settings a notification template for new callback';
+$_['help_new_callback_ex']            = 'You have received a new callback';
 $_['help_new_return']               = 'Settings a notification template for new return';
 $_['help_new_return_ex']            = 'Customer {customer_firstname} requested a return of {product_name} (model {product_model}), order no. {order_id}, store {store_name}. Comment from customer "{comment}"';
 $_['help_module']                   = 'Instructions for setting module (only in Russian language)';

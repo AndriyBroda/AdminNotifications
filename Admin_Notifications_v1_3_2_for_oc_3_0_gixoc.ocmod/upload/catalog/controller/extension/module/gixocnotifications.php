@@ -10,7 +10,7 @@ class ControllerExtensionModuleGixOCNotifications extends Controller {
 		$this->langdata = $this->config->get('module_gixocnotifications_langdata');
 	}
 
-	public function new_order(&$route, &$data) {
+	public function new_order(&$route, &$data, &$output) {
 		$order_id = $output;
     
 		if (isset($order_id) && !empty($order_id) ) {
